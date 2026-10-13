@@ -1,10 +1,33 @@
+# Entorno virtual de Python: las librerías instaladas con pip.
+# Se recrea con `pip install -r requirements-dev.txt`.
 .venv/
+
+# Archivos compilados que Python genera solo al ejecutar el código.
 __pycache__/
 *.py[cod]
+
+# Secretos y configuración local (SECRET_KEY, contraseña de la base).
+# La plantilla sin secretos es .env.example, que sí se sube.
 .env
+
+# Base de datos SQLite que Django crea por defecto.
+# El proyecto usa PostgreSQL, así que es solo una protección.
 db.sqlite3
+
+# Archivos subidos por los usuarios (imágenes de personajes).
+# Son datos, no código.
 media/
+
+# Salida de `collectstatic` para producción.
+# Se genera a partir de static/, que sí se sube.
 staticfiles/
+
+# Caché de ruff, la herramienta que revisa el estilo del código.
 .ruff_cache/
+
+# Configuración personal de los editores (PyCharm y VS Code).
 .idea/
 .vscode/
+
+# Archivos que macOS crea en cada carpeta al abrirla en Finder.
+.DS_Store
