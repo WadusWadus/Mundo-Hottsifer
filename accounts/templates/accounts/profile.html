@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Mi cuenta · El mundo de Hottsifer{% endblock %}
+
+{% block content %}
+    <div class="mx-auto max-w-2xl">
+        <header class="mb-6 flex items-center justify-between gap-4">
+            <div class="min-w-0">
+                <h1 class="break-words font-display text-3xl font-medium leading-none tracking-tight sm:text-4xl">{{ user.username }}</h1>
+                <p class="mt-2 text-sm text-musgo">Cuenta creada el {{ user.date_joined|date:"j \d\e F \d\e Y" }}</p>
+            </div>
+            <form method="post" action="{% url 'accounts:logout' %}" class="shrink-0">
+                {% csrf_token %}
+                <button type="submit" class="rounded-full bg-niebla px-4 py-2 text-sm font-medium hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laguna">Salir</button>
+            </form>
+        </header>
+
+        <h2 class="mb-3 font-display text-2xl font-bold tracking-tight">Mis personajes</h2>
+        {% if characters %}
+            <ul class="space-y-2">
+                {% for character in characters %}
+                    <li class="flex items-center justify-between gap-3 rounded-2xl bg-niebla px-4 py-3 shadow-[0_2px_0_#BFE0D4]">
+                        {% if character.status == 'published' %}
+                            <a href="{{ character.get_absolute_url }}" class="min-w-0 break-words font-semibold underline underline-offset-4 hover:text-laguna">{{ character.name }}</a>
+                        {% else %}
+                            <span class="min-w-0 break-words font-semibold">{{ character.name }}</span>
+                        {% endif %}
+                        <span class="shrink-0 rounded-full px-3 py-1 text-sm {% if character.status == 'published' %}bg-salvia{% else %}bg-white text-musgo{% endif %}">{{ character.get_status_display }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="rounded-2xl bg-niebla p-6 text-musgo">Todavía no has escrito ningún personaje.</p>
+        {% endif %}
+    </div>
+{% endblock %}

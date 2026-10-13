@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Personajes · El mundo de Hottsifer{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5 font-display text-3xl font-medium tracking-tight sm:text-4xl">Explora personajes</h1>
+
+    {% if characters %}
+        <ul class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {% for character in characters %}
+                <li>
+                    <a href="{{ character.get_absolute_url }}" class="block h-full rounded-2xl bg-niebla p-3 shadow-[0_2px_0_#BFE0D4] hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laguna sm:p-4">
+                        <div class="mb-2 flex items-center gap-2">
+                            {% if character.image %}
+                                <img src="{{ character.image.url }}" alt="" class="h-10 w-10 shrink-0 rounded-full object-cover sm:h-12 sm:w-12">
+                            {% else %}
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-salvia font-display text-lg font-bold sm:h-12 sm:w-12" aria-hidden="true">{{ character.name|first|upper }}</span>
+                            {% endif %}
+                            <h2 class="font-display text-base font-bold leading-tight sm:text-lg">{{ character.name }}</h2>
+                        </div>
+                        <p class="line-clamp-4 text-sm leading-snug text-musgo">{{ character.description }}</p>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="rounded-2xl bg-niebla p-6 text-musgo">Todavía no hay personajes publicados.</p>
+    {% endif %}
+{% endblock %}

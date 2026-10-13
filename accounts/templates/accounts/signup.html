@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear cuenta · El mundo de Hottsifer{% endblock %}
+
+{% block content %}
+    <div class="mx-auto max-w-md">
+        <h1 class="mb-2 font-display text-3xl font-medium tracking-tight sm:text-4xl">Crear cuenta</h1>
+        <p class="mb-5 text-musgo">Con una cuenta puedes escribir personajes. Nacen como borrador y el equipo los revisa antes de publicarlos.</p>
+
+        <form method="post" class="space-y-4 rounded-2xl bg-niebla p-5 shadow-[0_2px_0_#BFE0D4] sm:p-6">
+            {% csrf_token %}
+            {% include 'accounts/_form_fields.html' %}
+            <button type="submit" class="w-full rounded-full bg-laguna px-5 py-3 font-semibold text-white hover:bg-bosque focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laguna">Crear cuenta</button>
+        </form>
+
+        <p class="mt-5 text-musgo">¿Ya tienes cuenta? <a href="{% url 'accounts:login' %}" class="font-semibold text-bosque underline underline-offset-4 hover:text-laguna">Entrar</a></p>
+    </div>
+{% endblock %}

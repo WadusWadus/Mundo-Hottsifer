@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ character.name }} · El mundo de Hottsifer{% endblock %}
+
+{% block content %}
+    <a href="{% url 'characters:list' %}" class="mb-5 inline-block rounded-full bg-niebla px-4 py-2 text-sm font-medium hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laguna">Volver a personajes</a>
+
+    <article class="mx-auto max-w-2xl">
+        <header class="mb-6">
+            {% if character.image %}
+                <img src="{{ character.image.url }}" alt="Retrato de {{ character.name }}" width="{{ character.image.width }}" height="{{ character.image.height }}" class="mb-5 h-auto max-h-[75vh] w-full rounded-3xl object-cover ring-4 ring-white">
+            {% else %}
+                <span class="mb-5 flex aspect-[4/3] w-full items-center justify-center rounded-3xl bg-salvia font-display text-8xl font-bold ring-4 ring-white" aria-hidden="true">{{ character.name|first|upper }}</span>
+            {% endif %}
+            <h1 class="break-words font-display text-4xl font-medium leading-none tracking-tight sm:text-5xl">{{ character.name }}</h1>
+        </header>
+
+        <div class="space-y-3 text-lg leading-relaxed">{{ character.description|linebreaks }}</div>
+
+        {% if character.lore %}
+            <section class="mt-8 rounded-2xl bg-niebla p-5 shadow-[0_2px_0_#BFE0D4] sm:p-6">
+                <h2 class="mb-3 font-display text-2xl font-bold tracking-tight">Lore</h2>
+                <div class="space-y-3 leading-relaxed text-musgo">{{ character.lore|linebreaks }}</div>
+            </section>
+        {% endif %}
+    </article>
+{% endblock %}

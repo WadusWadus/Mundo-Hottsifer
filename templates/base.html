@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}El mundo de Hottsifer{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        menta: '#D9F0E8',
+                        niebla: '#EEF8F3',
+                        salvia: '#BFE0D4',
+                        laguna: '#2E8C78',
+                        bosque: '#12372F',
+                        musgo: '#4A6B62',
+                    },
+                    fontFamily: {
+                        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+                        sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-menta font-sans text-bosque antialiased">
+    <header class="bg-white">
+        <div class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+            <a href="{% url 'characters:list' %}" class="flex items-center gap-2 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-laguna">
+                <span class="h-6 w-6 rounded-full border-[5px] border-laguna border-r-salvia" aria-hidden="true"></span>
+                <span class="font-display text-lg font-bold leading-none tracking-tight">El mundo de Hottsifer</span>
+            </a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:profile' %}" class="shrink-0 rounded-full bg-menta px-4 py-2 text-sm font-semibold hover:bg-salvia focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laguna">Mi cuenta</a>
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="shrink-0 rounded-full bg-menta px-4 py-2 text-sm font-semibold hover:bg-salvia focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laguna">Entrar</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 pb-16 pt-6">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

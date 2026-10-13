@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Entrar · El mundo de Hottsifer{% endblock %}
+
+{% block content %}
+    <div class="mx-auto grid max-w-4xl gap-6 md:grid-cols-2 md:items-stretch">
+        <img src="{% static 'img/login-hero.svg' %}" alt="" class="h-56 w-full rounded-3xl object-cover ring-4 ring-white md:h-full md:min-h-[30rem]">
+
+        <div class="md:self-center">
+            <h1 class="mb-2 font-display text-3xl font-medium tracking-tight sm:text-4xl">Entrar</h1>
+            <p class="mb-5 text-musgo">Entra con tu cuenta para ver los personajes.</p>
+
+            <form method="post" class="space-y-4 rounded-2xl bg-niebla p-5 shadow-[0_2px_0_#BFE0D4] sm:p-6">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                {% include 'accounts/_form_fields.html' %}
+                <button type="submit" class="w-full rounded-full bg-laguna px-5 py-3 font-semibold text-white hover:bg-bosque focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laguna">Entrar</button>
+            </form>
+
+            <p class="mt-5 text-musgo">¿No tienes cuenta? <a href="{% url 'accounts:signup' %}" class="font-semibold text-bosque underline underline-offset-4 hover:text-laguna">Crear cuenta</a></p>
+        </div>
+    </div>
+{% endblock %}
